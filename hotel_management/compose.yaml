@@ -1,0 +1,30 @@
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mariadb:10.11
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: root_dev_password
+      MARIADB_DATABASE: hotel_management
+      MARIADB_USER: hotel_user
+      MARIADB_PASSWORD: hotel_password_dev
+    ports:
+      - "3307:3306"
+    volumes:
+      - hotel_db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  hotel_db_data:
