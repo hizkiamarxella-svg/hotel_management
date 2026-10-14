@@ -1,9 +1,10 @@
+```yaml
 services:
   web:
     build: .
     ports:
       - "8080:80"
-      environment:
+    environment:
       DB_HOST: db
       DB_NAME: hotel_management
       DB_USER: ${MARIADB_USER:-hotel_user}
@@ -22,7 +23,7 @@ services:
       MARIADB_PASSWORD: ${MARIADB_PASSWORD}
     ports:
       - "3307:3306"
-        volumes:
+    volumes:
       - hotel_db_data:/var/lib/mysql
       - ./hotel_management.sql:/docker-entrypoint-initdb.d/01-hotel-management.sql:ro
     healthcheck:
@@ -33,3 +34,4 @@ services:
 
 volumes:
   hotel_db_data:
+```
