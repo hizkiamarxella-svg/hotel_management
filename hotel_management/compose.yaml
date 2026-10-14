@@ -1,4 +1,3 @@
-
 services:
   web:
     build: .
@@ -12,10 +11,10 @@ services:
     image: mariadb:10.11
     restart: unless-stopped
     environment:
-      MARIADB_ROOT_PASSWORD: root_dev_password
-      MARIADB_DATABASE: hotel_management
-      MARIADB_USER: hotel_user
-      MARIADB_PASSWORD: hotel_password_dev
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${MARIADB_DATABASE:-hotel_management}
+      MARIADB_USER: ${MARIADB_USER:-hotel_user}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
     ports:
       - "3307:3306"
     volumes:
