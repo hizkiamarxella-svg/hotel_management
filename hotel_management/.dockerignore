@@ -1,0 +1,10 @@
+.git
+.gitignore
+.env
+*.log
+backup_docker.sql
+hotel_export.sql
+reset_tables.sql
+backup_php/
+.DS_Store
+Thumbs.db
