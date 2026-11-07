@@ -1,11 +1,12 @@
-
 name: Hotel Management CI
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   php-lint:
@@ -22,9 +23,9 @@ jobs:
             -v "$GITHUB_WORKSPACE/hotel_management:/app" \
             -w /app \
             php:8.2-cli \
-            sh -c 'find . -type f -name "*.php" -not -path "./vendor/*" -print0 | xargs -0 -n1 php -l'
+            sh -c 'find . -type f -name "*.php" -not -path "./vendor/*" -print0 | xargs -0 -r -n1 php -l'
 
-   docker-build:
+  docker-build:
     name: Docker Build
     runs-on: ubuntu-latest
 
